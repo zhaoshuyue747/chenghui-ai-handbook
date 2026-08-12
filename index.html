@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>橙辉供应链 · AI 智能体与技能共享手册</title>
+<style>
+  :root{
+    --navy:#0a2540;
+    --navy2:#123a6b;
+    --blue:#1677ff;
+    --blue-l:#e8f1ff;
+    --orange:#ff6a00;
+    --orange-l:#fff3e8;
+    --ink:#1f2937;
+    --gray:#6b7280;
+    --line:#e5e7eb;
+    --bg:#f6f8fb;
+    --card:#ffffff;
+    --green:#16a34a;
+    --green-l:#eaf7ee;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Microsoft YaHei","PingFang SC","Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px;
+  }
+  /* ===== 顶部横幅 ===== */
+  .hero{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 55%,#1d5bbf 100%);
+    color:#fff;padding:64px 24px 56px;text-align:center;position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;right:-120px;top:-120px;width:380px;height:380px;
+    border-radius:50%;background:rgba(255,255,255,.06);
+  }
+  .hero::before{
+    content:"";position:absolute;left:-80px;bottom:-160px;width:320px;height:320px;
+    border-radius:50%;background:rgba(22,119,255,.25);
+  }
+  .hero .badge{
+    display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);
+    border-radius:999px;padding:4px 16px;font-size:13px;letter-spacing:2px;margin-bottom:20px;
+  }
+  .hero h1{font-size:34px;font-weight:700;letter-spacing:1px;position:relative;z-index:1}
+  .hero .sub{font-size:16px;color:#cfe0f7;margin-top:14px;position:relative;z-index:1}
+  .hero .brand{margin-top:22px;font-size:14px;color:#9db8dd;position:relative;z-index:1}
+  /* ===== 容器与区块 ===== */
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  section{padding:52px 0 8px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+  .sec-head .bar{width:6px;height:26px;border-radius:3px;background:linear-gradient(180deg,var(--blue),#3d8bff)}
+  .sec-head h2{font-size:24px;font-weight:700;color:var(--navy)}
+  .sec-head .en{font-size:13px;color:var(--gray);letter-spacing:1px;margin-top:2px}
+  /* ===== 卡片 ===== */
+  .grid{display:grid;gap:20px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:24px;box-shadow:0 1px 3px rgba(16,42,67,.06);transition:transform .18s ease,box-shadow .18s ease;
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(16,42,67,.10)}
+  .card .ic{
+    width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    font-size:24px;margin-bottom:14px;
+  }
+  .card h3{font-size:17px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .card .tag{
+    font-size:11px;font-weight:400;border-radius:6px;padding:2px 8px;
+  }
+  .tag.hot{background:var(--orange-l);color:var(--orange)}
+  .tag.new{background:var(--green-l);color:var(--green)}
+  .tag.blue{background:var(--blue-l);color:var(--blue)}
+  .card p{font-size:14px;color:var(--gray);margin-top:8px}
+  .card .cap{font-size:13px;color:var(--ink);background:var(--bg);border-radius:8px;padding:10px 12px;margin-top:12px}
+  .card .cap b{color:var(--blue)}
+  /* ===== 表格 ===== */
+  table{width:100%;border-collapse:collapse;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(16,42,67,.06)}
+  thead th{
+    background:linear-gradient(90deg,var(--navy),var(--navy2));color:#fff;font-weight:600;
+    padding:14px 16px;text-align:left;font-size:14px;white-space:nowrap;
+  }
+  tbody td{padding:14px 16px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top}
+  tbody tr:nth-child(even){background:#fafcff}
+  tbody tr:hover{background:var(--blue-l)}
+  td .k{color:var(--navy);font-weight:600}
+  td .trig{font-size:12px;color:var(--gray);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:1px 7px;margin:2px 3px 0 0;display:inline-block}
+  /* ===== 下载 ===== */
+  .dl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .dl-card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;
+    flex-direction:column;gap:10px;box-shadow:0 1px 3px rgba(16,42,67,.06);
+  }
+  .dl-card .fname{font-weight:700;color:var(--navy);font-size:15px;word-break:break-all}
+  .dl-card .fmeta{font-size:12px;color:var(--gray)}
+  .dl-card .fdesc{font-size:13px;color:var(--gray);flex:1}
+  .dl-btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    background:linear-gradient(90deg,var(--blue),#3d8bff);color:#fff;text-decoration:none;
+    padding:10px 18px;border-radius:9px;font-size:14px;font-weight:600;
+    transition:opacity .15s;
+  }
+  .dl-btn:hover{opacity:.88}
+  .dl-btn.orange{background:linear-gradient(90deg,var(--orange),#ff8a3d)}
+  .notice{
+    background:var(--orange-l);border:1px solid #ffd9b8;color:#9a4500;border-radius:12px;
+    padding:14px 18px;font-size:13px;margin-top:22px;
+  }
+  .notice b{color:var(--orange)}
+  /* ===== 安装步骤 ===== */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+  .step-card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;position:relative;
+    box-shadow:0 1px 3px rgba(16,42,67,.06);
+  }
+  .step-card .no{
+    position:absolute;top:-14px;left:20px;width:36px;height:36px;border-radius:10px;
+    background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;font-weight:700;
+    display:flex;align-items:center;justify-content:center;font-size:16px;
+  }
+  .step-card h3{font-size:16px;color:var(--navy);margin:6px 0 12px}
+  .step-card ol{padding-left:20px;font-size:14px;color:var(--ink)}
+  .step-card ol li{margin-bottom:8px}
+  .step-card code{background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12.5px;color:var(--blue)}
+  .doclink{
+    display:block;margin-top:26px;background:var(--blue-l);border:1px solid #c9ddff;border-radius:12px;
+    padding:14px 18px;font-size:13px;color:var(--navy);text-decoration:none;
+  }
+  .doclink:hover{background:#dcebff}
+  .hub-btn{
+    display:inline-flex;align-items:center;gap:6px;margin-top:14px;
+    background:var(--blue-l);color:var(--blue);border:1px solid #c9ddff;
+    text-decoration:none;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;
+    transition:background .15s;
+  }
+  .hub-btn:hover{background:#dcebff}
+  .hub-more{
+    margin-top:22px;text-align:center;background:var(--card);border:1px dashed #b9cce8;
+    border-radius:12px;padding:16px;
+  }
+  .hub-more a{color:var(--blue);font-weight:600;text-decoration:none}
+  .hub-more a:hover{text-decoration:underline}
+  /* ===== 页脚 ===== */
+  footer{
+    margin-top:64px;background:var(--navy);color:#9db8dd;text-align:center;padding:30px 20px;font-size:13px;
+  }
+  footer .co{color:#fff;font-weight:600;margin-bottom:6px}
+  @media (max-width:640px){
+    .hero h1{font-size:26px}
+    .sec-head h2{font-size:20px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= 顶部横幅 ================= -->
+<div class="hero">
+  <div class="badge">AI 能力共享手册</div>
+  <h1>橙辉供应链 · AI 智能体与技能库</h1>
+  <div class="sub">国际站生意助手 × 一拍档业务运营助手 —— 让 AI 成为您的跨境生意增长引擎</div>
+  <div class="brand">东莞市橙辉供应链管理有限公司</div>
+</div>
+
+<div class="wrap">
+
+<!-- ================= 一、智能体 ================= -->
+<section id="agents">
+  <div class="sec-head">
+    <div class="bar"></div>
+    <div><h2>一、智能体 Agent</h2><div class="en">READY-TO-USE AI AGENTS</div></div>
+  </div>
+  <div class="grid g2">
+    <div class="card">
+      <div class="ic" style="background:var(--orange-l)">🚀</div>
+      <h3>国际站生意助手 <span class="tag hot">推荐 · 开箱即用</span></h3>
+      <p>专为跨境卖家设计，选品、发品、素材生成到经营分析，一站式 AI 全链路支持，覆盖卖家核心经营环节。</p>
+      <div class="cap"><b>能力：</b>选品分析 ｜ 商品发布 ｜ 营销素材生成 ｜ 经营数据分析</div>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:var(--blue-l)">🤝</div>
+      <h3>Accio Assistant <span class="tag blue">一拍档业务运营助手</span></h3>
+      <p>面向一拍档业务运营的日常全能助手，已预装橙辉定制技能：客户拜访准备、数据罗盘取数、数据分析、公司数据管理等，即问即用。</p>
+      <div class="cap"><b>能力：</b>客户拜访 ｜ 取数统计 ｜ 数据分析 ｜ 文档·表格·演示 ｜ 培训管理</div>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:var(--green-l)">🧩</div>
+      <h3>可选扩展智能体</h3>
+      <p>按业务需要可随时启用，与上述智能体互补使用。</p>
+      <div class="cap"><b>Site Builder</b> —— AI 对话建站，自动更新、线索收集、自定义域名<br><b>Shopify Expert</b> —— Shopify 店铺选品、上架、装修与增长顾问<br><b>Design Expert</b> —— 图片生成、视频创作与视觉内容编辑</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 二、Agent Hub 精选 ================= -->
+<section id="hub">
+  <div class="sec-head">
+    <div class="bar"></div>
+    <div><h2>二、Agent Hub 精选智能体</h2><div class="en">FROM AGENT HUB · 国际站商家精选必装</div></div>
+  </div>
+  <div class="grid g3">
+    <div class="card">
+      <div class="ic" style="background:var(--blue-l)">🕵️</div>
+      <h3>客户背调 <span class="tag hot">13K 下载</span></h3>
+      <p>电商通用客户背调分析：商业情报猎手，专精客户深度背调。通过多源信息还原客户真实画像，精准判断客户价值与采购意愿，输出可落地的跟进策略与成交话术。</p>
+      <a class="hub-btn" href="https://agenthub.accio-ai.com/" target="_blank">去 Agent Hub 查看 ›</a>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:var(--orange-l)">🏆</div>
+      <h3>优爆品打造助手 <span class="tag hot">5.7K 下载</span></h3>
+      <p>阿里巴巴国际站选品与商品开发：店铺商品结构诊断、指定商品打造优爆品（信息质量分优化、竞争力配置、交易转化提升）、发定招品，帮您盘活店铺商品资产。</p>
+      <a class="hub-btn" href="https://agenthub.accio-ai.com/" target="_blank">去 Agent Hub 查看 ›</a>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:var(--green-l)">📋</div>
+      <h3>信保跟单助手 <span class="tag hot">1.7K 下载</span></h3>
+      <p>「小TA」国际站信保订单跟单助手：从下单、付款、备货、发货到邀评、售后、履约异常，全链路主动预警，每日订单日报直达，异常处理建议 + 买家沟通话术。</p>
+      <a class="hub-btn" href="https://agenthub.accio-ai.com/" target="_blank">去 Agent Hub 查看 ›</a>
+    </div>
+  </div>
+  <div class="hub-more">
+    💡 更多面向发品、询盘、选品、运营场景的实战智能体与技能，见
+    <a href="https://agenthub.accio-ai.com/" target="_blank">Agent Hub（agenthub.accio-ai.com）</a>
+  </div>
+</section>
+
+<!-- ================= 三、核心技能 ================= -->
+<section id="skills">
+  <div class="sec-head">
+    <div class="bar"></div>
+    <div><h2>三、核心技能 SKILL</h2><div class="en">SPECIALIZED CAPABILITIES</div></div>
+  </div>
+  <table>
+    <thead>
+      <tr><th style="width:180px">技能名称</th><th>作用说明</th><th style="width:200px">使用方式 / 触发词</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="k">客户拜访准备<br><span style="font-size:12px;color:var(--gray)">customer-visit-briefing</span></td>
+        <td>销售拜访客户全流程智能助手：拜访前自动拉取客户核心数据，生成客户诊断、产品机会排序与针对性上门话术；拜访后复盘反馈，成功经验自动沉淀到知识库。</td>
+        <td>「拜访客户」「客户概况」「帮我准备XX客户资料」「给XX客户做分析」「拜访复盘」</td>
+      </tr>
+      <tr>
+        <td class="k">一拍档精准取数指南<br><span style="font-size:12px;color:var(--gray)">取数口径 SOP</span></td>
+        <td>锁定全量取数路径与统计口径（信保 GMV/实收、ACP 收入、3万客户、信保拉新、优爆品 3.0 等），确保每次取数口径一致、数据准确，杜绝统计差异。</td>
+        <td>对话中直接说「按标准口径拉取XX数据」即可调用</td>
+      </tr>
+      <tr>
+        <td class="k">一拍档数据分析<br><span style="font-size:12px;color:var(--gray)">数据脚本包</span></td>
+        <td>内置数据分析与图表生成脚本，自动产出月报/季报、销售仪表盘与图片报告，把罗盘数据变成可直接汇报的分析结果。</td>
+        <td>对话中提供数据表，说「生成分析」「出月报」「做仪表盘」</td>
+      </tr>
+      <tr>
+        <td class="k">公司数据管理分析<br><span style="font-size:12px;color:var(--gray)">corporate-data-management</span></td>
+        <td>上传表格或录入单条数据，自动完成储存、分类、清洗、计算，按需生成 Excel 报表、Word 汇报、PPT 演示。覆盖物流快递（AWB 报价/成本/装柜/利润）、贸易公司、企业服务三大场景。</td>
+        <td>「帮我分析这份表格」「算这批货的报价」「统计员工业绩」「出月度报表」</td>
+      </tr>
+      <tr>
+        <td class="k">钉钉培训数据闭环<br><span style="font-size:12px;color:var(--gray)">培训演练统计</span></td>
+        <td>在钉钉多维表格中建立培训数据库，H5 演练产生的评分、轮数等结果自动同步入表，用于员工在线训练数据统计与复盘。</td>
+        <td>用于员工 AI 训练考核场景</td>
+      </tr>
+      <tr>
+        <td class="k">通用办公技能<br><span style="font-size:12px;color:var(--gray)">Built-in</span></td>
+        <td>随智能体开箱即用的基础能力：Word 文档、Excel 表格、PPT 演示、PDF、邮件、图片压缩等，无需单独安装。</td>
+        <td>随智能体默认启用</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ================= 三、技能压缩包下载 ================= -->
+<section id="download">
+  <div class="sec-head">
+    <div class="bar"></div>
+    <div><h2>四、技能压缩包下载</h2><div class="en">SKILL PACKAGES</div></div>
+  </div>
+  <div class="dl-grid">
+    <div class="dl-card">
+      <div class="fname">📦 阿里巴巴一拍档精准取数指南_SKILL.zip</div>
+      <div class="fmeta">约 1 KB ｜ 含 SKILL.md</div>
+      <div class="fdesc">取数路径与统计口径 SOP 技能包：信保 GMV/实收、ACP 收入、3万客户、信保拉新、优爆品 3.0 全量口径锁定。</div>
+      <a class="dl-btn" href="skill-packages/阿里巴巴一拍档精准取数指南_SKILL.zip" download>⬇ 下载技能包</a>
+    </div>
+    <div class="dl-card">
+      <div class="fname">📦 阿里巴巴一拍档数据分析_SKILL.zip</div>
+      <div class="fmeta">约 30 KB ｜ 含 SKILL.md + 分析脚本</div>
+      <div class="fdesc">数据分析技能包：自动生成月报/季报、销售仪表盘、分析图片，附 Python 分析脚本开箱即用。</div>
+      <a class="dl-btn orange" href="skill-packages/阿里巴巴一拍档数据分析_SKILL.zip" download>⬇ 下载技能包</a>
+    </div>
+    <div class="dl-card">
+      <div class="fname">📦 客户拜访准备_SKILL.zip</div>
+      <div class="fmeta">约 17 KB ｜ 含 SKILL.md + 参考文档</div>
+      <div class="fdesc">客户拜访全流程技能包：拜访前诊断、产品机会排序、话术生成、拜访后复盘与经验沉淀。</div>
+      <a class="dl-btn" href="skill-packages/客户拜访准备_SKILL.zip" download>⬇ 下载技能包</a>
+    </div>
+    <div class="dl-card">
+      <div class="fname">📦 客户背调_SKILL.zip</div>
+      <div class="fmeta">约 121 KB ｜ 含 SKILL.md + 参考文档</div>
+      <div class="fdesc">客户背调技能包：多源信息还原客户真实画像，判断客户价值与采购意愿，输出跟进策略与成交话术。</div>
+      <a class="dl-btn" href="skill-packages/客户背调_SKILL.zip" download>⬇ 下载技能包</a>
+    </div>
+    <div class="dl-card">
+      <div class="fname">📦 优爆品打造助手_SKILL.zip</div>
+      <div class="fmeta">约 38 KB ｜ 含 SKILL.md</div>
+      <div class="fdesc">优爆品打造技能包：店铺商品结构诊断、打造优爆品全链路执行、发定招品，盘活店铺商品资产。</div>
+      <a class="dl-btn orange" href="skill-packages/优爆品打造助手_SKILL.zip" download>⬇ 下载技能包</a>
+    </div>
+  </div>
+  <div class="notice">
+    <b>说明：</b>压缩包为技能源码包，下载后请 <b>先解压</b>（技能文件夹内须包含 <b>SKILL.md</b>），再按下方「安装方式二」通过「安装本地技能」加载到您的 Accio Work。
+  </div>
+</section>
+
+<!-- ================= 四、安装方式 ================= -->
+<section id="install">
+  <div class="sec-head">
+    <div class="bar"></div>
+    <div><h2>五、安装方式</h2><div class="en">HOW TO INSTALL</div></div>
+  </div>
+  <div class="steps">
+    <div class="step-card">
+      <div class="no">A</div>
+      <h3>方式一：技能商店一键安装（官方技能）</h3>
+      <ol>
+        <li>打开 Accio Work，点击<b>侧边栏底部用户头像</b>，选择「<b>技能</b>」；</li>
+        <li>在技能页面浏览「精选技能」或用顶部搜索框<b>搜索关键词</b>；</li>
+        <li>点击技能卡片上的「<b>安装</b>」按钮，技能自动下载并加入您的技能库。</li>
+      </ol>
+      <p style="font-size:13px;color:var(--gray);margin-top:10px">快捷入口：工作台「Plugins」频道 → 左上角切换到「Skills」标签 → 点技能右侧「+」。</p>
+    </div>
+    <div class="step-card">
+      <div class="no">B</div>
+      <h3>方式二：安装本地技能（本页技能压缩包）</h3>
+      <ol>
+        <li>点击上方按钮<b>下载压缩包</b>，并解压为技能文件夹（内含 <code>SKILL.md</code>）；</li>
+        <li>进入「<b>技能</b>」页面，点击「<b>安装本地技能</b>」；</li>
+        <li>选择<b>解压后的技能文件夹</b>完成加载，技能即刻生效。</li>
+      </ol>
+      <p style="font-size:13px;color:var(--gray);margin-top:10px">提示：若技能包自带脚本/参考文档，请保持文件夹结构完整，不要单独移动文件。</p>
+    </div>
+  </div>
+  <div class="doclink">
+    📖 <b>管理与配置：</b>技能安装后可在「技能」页统一启用/禁用/卸载；也可进入「Agents」页 → 选择智能体 → 「管理技能」，为每个智能体单独勾选所需技能。
+    官方文档：<a href="https://www.accio-ai.com/work/documents/zh/help-skills.html" target="_blank" style="color:var(--blue);font-weight:600">Accio Work 技能管理文档</a>
+  </div>
+</section>
+
+</div>
+
+<!-- ================= 页脚 ================= -->
+<footer>
+  <div class="co">东莞市橙辉供应链管理有限公司</div>
+  <div>橙辉 AI 能力共享手册 · 本页面可自由转发共享</div>
+</footer>
+
+</body>
+</html>
